@@ -40,7 +40,8 @@ class PostSource extends Extension
             $source = $event->get_param('url');
         }
         if ($user->can(Permissions::EDIT_IMAGE_SOURCE) && !is_null($source)) {
-            if (isset($event->params['tags']) ? !preg_match('/source[=|:]/', $event->params["tags"]) : true) {
+            $tagset = is_array($event->params["tags"]) ? implode(' ', $event->params["tags"]) : $event->params["tags"];
+            if (isset($tagset) ? !preg_match('/source[=|:]/', $tagset) : true) {
                 send_event(new SourceSetEvent($event->image, $source));
             }
         }

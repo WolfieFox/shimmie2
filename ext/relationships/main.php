@@ -56,7 +56,8 @@ class Relationships extends Extension
     {
         global $user;
         if ($user->can(Permissions::EDIT_IMAGE_RELATIONSHIPS)) {
-            if (isset($event->params['tags']) ? !preg_match('/parent[=|:]/', $event->params["tags"]) : true) { //Ignore parent if tags contain parent metatag
+            $tagset = is_array($event->params["tags"]) ? implode(' ', $event->params["tags"]) : $event->params["tags"];
+            if (isset($tagset) ? !preg_match('/parent[=|:]/', $tagset) : true) { //Ignore parent if tags contain parent metatag
                 if (isset($event->params["parent"]) ? ctype_digit($event->params["parent"]) : false) {
                     send_event(new ImageRelationshipSetEvent($event->image->id, (int) $event->params["parent"]));
                 } else {
