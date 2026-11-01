@@ -32,6 +32,7 @@ if (!file_exists("data/config/shimmie.conf.php")) {
 \* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 @include_once "data/config/shimmie.conf.php";
+@include_once "core/Search/Search.php";
 @include_once "data/config/extensions.conf.php";
 
 _set_up_shimmie_environment();
